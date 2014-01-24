@@ -6,7 +6,7 @@
         try to match a Category object.
  #}
 
-{% block title %}{{ category.title or 'Categories' }}{% endblock %}
+{% block title %}{{ category.title or '分类' }}{% endblock %}
 
 {% block content %}
     {% if request.path not  in ['/category', '/cateogroy/'] %}
