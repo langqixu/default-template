@@ -10,8 +10,8 @@
     <link rel='alternate' type='application/rss+xml' title='atom 1.0' href='/feed' />
     <title>{% block title %}{{ request.args.s or site.title }} {% endblock %}</title>
 
-    {{ load('fonts {{resource_host}}/lib/pure.css {{resource_host}}/site/css/blog.css') }}
-
+    {{ load('fonts {{resource_host}}/lib/pure.css') }}
+    {{ load('/template/css/blog.less?format=css') }}
 
     {% block head %}
     {% endblock %}
@@ -31,19 +31,24 @@
         <h1 class="brand-title">{{ site.title }}</h1>
 
         <ul class="nav">
-            {% if has('images') %}
-            <li> <a href="/album">Albums</a></li>
+            <!--
+            {% if site.images_count %}
+            <li> <a href="/album">相册</a></li>
+                {% if not has('posts') %}
+                    {{ redirect('/album') }}
+                {% endif %}
             {% endif %}
-            <li>{{ a_with_selected('/category', 'Categories') }}</li>
-            <li>{{ a_with_selected('/archive', 'Archive', equal=True) }}</li>
+            -->
+            <li>{{ a_with_selected('/category', '分类') }}</li>
+            <li>{{ a_with_selected('/archive', '归档', equal=True) }}</li>
             {% if site.tags %}
-            <li>{{ a_with_selected('/archive?use=tags', 'Tags') }}</li>
+            <li>{{ a_with_selected('/tags', '标签') }}</li>
             {% endif %}
             {% if has('about.md') %}
-            <li>{{ a_with_selected('/about.md', 'About') }}</li>
+            <li>{{ a_with_selected('/about.md', '关于') }}</li>
             {% endif %}
             <li> <a href="/feed">RSS</a> </li>
-            <li><a href="#" onclick="new_post();return false">Write!</a></li>
+            <!--<li><a href="#" onclick="new_post();return false">Write!</a></li>-->
         </ul>
 
         <ul class="my-socials">
@@ -53,6 +58,14 @@
             <li >
                 <a href="{{ get_social_url(social, site.configs.get(social)) }}" class="{{ social }}" target="_blank">
                     <i class="fa fa-{{ social }}"></i>
+                </a>
+            </li>
+            <li >
+                <a href="http://zhihu.com/people/langqixu" class="zhihu" target="_blank">
+                </a>
+            </li>
+            <li >
+                <a href="http://douban.com/people/qidoing" class="douban" target="_blank">
                 </a>
             </li>
                 {% endif %}
@@ -78,13 +91,15 @@
         <div id="footer">
             <div class="powered_by">
                 <a target='_blank' href="http://www.farbox.com">Powered By FarBox.com</a>
-                {% if request.is_login %}
-                    <a href="/admin">Admin</a>
-                {% else %}
-                    <a href="#" onclick="login('/admin')" class="admin">Admin</a>
-                {% endif %}
+            <!--
+            {% if request.is_login %}
+                <a href="/admin">Admin</a>
+            {% else %}
+                <a href="#" onclick="login('/admin')" class="admin">Admin</a>
+            {% endif %}
                 <a href="/?action=import" target="_blank">Move from WordPress</a>
-                <span>©2012-2015 Z.R.E.Y Inc.</span>
+                -->
+        <span>©2013 - 2014 本子</span>
             </div>
         </div>
 
